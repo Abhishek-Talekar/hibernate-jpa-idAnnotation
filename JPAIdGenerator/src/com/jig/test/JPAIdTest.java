@@ -9,7 +9,6 @@ import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
-import javax.transaction.Transaction;
 
 import com.jig.entities.Bill;
 import com.jig.helper.EntityManagerRegistry;
@@ -23,7 +22,7 @@ public class JPAIdTest {
 		boolean flag = false;
 
 		try {
-			entityManagerFactory = EntityManagerRegistry.getMySqlFactory();
+			entityManagerFactory = EntityManagerRegistry.getOracleFactory();
 			entityManager = entityManagerFactory.createEntityManager();
 			transaction = entityManager.getTransaction();
 			transaction.begin();
@@ -31,9 +30,9 @@ public class JPAIdTest {
 			bill.setBillAmt(2000);
 			bill.setBillDate(new Date());
 			bill.setBillerName("Flipkart");
-			bill.setBillNo(121);
 			bill.setCustomerName("Ahuja Traders");
 			entityManager.persist(bill);
+			System.out.println(bill.getBillNo());
 			
 			flag = true;
 		} finally {

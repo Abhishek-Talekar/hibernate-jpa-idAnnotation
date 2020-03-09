@@ -8,13 +8,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Entity
 @Table(name = "bill")
 public class Bill implements Serializable{
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name = "bill_no")
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(generator = "bill_seq")
+	//@SequenceGenerator(name = "bill_seq", sequenceName = "bill_sequence", initialValue = 1,allocationSize = 10)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "pk_tab")
+	@TableGenerator(name = "pk_tab", table = "pk_new_table", pkColumnName = "table_nm", valueColumnName = "pk_values", pkColumnValue = "bill")
 	protected int billNo;
 	
 	@Column(name = "biller_name")
